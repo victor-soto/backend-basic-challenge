@@ -1,8 +1,7 @@
 package com.victorsoto.accessmanagmentapi.web;
 
 import com.victorsoto.accessmanagmentapi.services.IExchangeRateService;
-import com.victorsoto.accessmanagmentapi.viewmodels.ExchangeRateRequest;
-import com.victorsoto.accessmanagmentapi.viewmodels.ExchangeRateResponse;
+import com.victorsoto.accessmanagmentapi.viewmodels.*;
 import io.reactivex.Single;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
@@ -20,7 +19,15 @@ public class ExchangeRateController {
 
   @PostMapping(value = "/calculate", produces = MediaType.APPLICATION_JSON_VALUE)
   public Single<ExchangeRateResponse> calculate(@RequestBody ExchangeRateRequest request) {
+
     return service.calculate(request);
   }
+
+  @PostMapping(value = "/update", produces = MediaType.APPLICATION_JSON_VALUE)
+  public Single<UpdateExchangeRateResponse> update(@RequestBody UpdateExchangeRateRequest request) {
+
+    return service.update(request);
+  }
+
 
 }

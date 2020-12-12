@@ -9,9 +9,9 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.victorsoto</groupId>
-    <artifactId>accessmanagementapi</artifactId>
+    <artifactId>backend-basic-challenge</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>accessmanagementapi</name>
+    <name>backend-basic-challenge-api</name>
     <description>Api de control de accesos</description>
 
     <properties>
@@ -52,8 +52,8 @@
         </dependency>
 
         <dependency>
-            <groupId>org.postgresql</groupId>
-            <artifactId>postgresql</artifactId>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
             <scope>runtime</scope>
         </dependency>
 

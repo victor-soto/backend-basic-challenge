@@ -6,10 +6,10 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @SpringBootApplication
-public class AccessManagementApplication {
+public class BackendBasicChallengeApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(AccessManagementApplication.class, args);
+		SpringApplication.run(BackendBasicChallengeApplication.class, args);
 	}
 
 	@Bean

@@ -3,6 +3,8 @@ package com.victorsoto.accessmanagmentapi.services;
 import com.victorsoto.accessmanagmentapi.repositories.ExchangeRateRepository;
 import com.victorsoto.accessmanagmentapi.viewmodels.ExchangeRateRequest;
 import com.victorsoto.accessmanagmentapi.viewmodels.ExchangeRateResponse;
+import com.victorsoto.accessmanagmentapi.viewmodels.UpdateExchangeRateRequest;
+import com.victorsoto.accessmanagmentapi.viewmodels.UpdateExchangeRateResponse;
 import io.reactivex.Single;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -28,6 +30,25 @@ public class ExchangeRateService implements IExchangeRateService {
           .sourceCurrency(exchangeRate.getSourceCurrency())
           .targetCurrency(exchangeRate.getTargetCurrency())
           .rate(exchangeRate.getRate().compareTo(BigDecimal.ONE) >= 1 ? exchangeRate.getRate() : exchangeRate.getRate().multiply(BigDecimal.valueOf(10)))
+          .build();
+    });
+  }
+
+  @Override
+  public Single<UpdateExchangeRateResponse> update(UpdateExchangeRateRequest request) {
+
+    return Single.fromCallable(() -> {
+      var exchangeRate = repository.findBySourceAndTargetAmount(request.getSourceCurrency(), request.getTargetCurrency())
+          .orElseThrow(() -> new NullPointerException("No se encontró información del tipo de cambio"));
+      exchangeRate.setRate(request.getRate());
+
+      var savedExchangeRate = repository.save(exchangeRate);
+
+      return UpdateExchangeRateResponse.builder()
+          .id(savedExchangeRate.getId())
+          .sourceCurrency(savedExchangeRate.getSourceCurrency())
+          .targetCurrency(savedExchangeRate.getTargetCurrency())
+          .rate(savedExchangeRate.getRate())
           .build();
     });
   }

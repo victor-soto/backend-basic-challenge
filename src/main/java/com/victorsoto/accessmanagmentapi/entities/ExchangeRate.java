@@ -20,7 +20,9 @@ public class ExchangeRate {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private long id;
 
+  @Column(precision = 12, scale = 4)
   private BigDecimal rate;
+
   @Enumerated(EnumType.STRING)
   @Column(name = "source_currency")
   private CurrencyEnum sourceCurrency;
