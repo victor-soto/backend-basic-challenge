@@ -3,6 +3,8 @@ package com.victorsoto.accessmanagmentapi.config.filters;
 import com.auth0.jwt.JWT;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.victorsoto.accessmanagmentapi.entities.ApplicationUser;
+import com.victorsoto.accessmanagmentapi.viewmodels.BearerTokenResponse;
+import org.springframework.http.MediaType;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -49,11 +51,16 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 
   @Override
   protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain,
-                                          Authentication authResult) {
+                                          Authentication authResult) throws IOException {
+    String username = ((User) authResult.getPrincipal()).getUsername();
+    var expiresAt = new Date(System.currentTimeMillis() + EXPIRATION_TIME);
     var token = JWT.create()
-        .withSubject(((User) authResult.getPrincipal()).getUsername())
-        .withExpiresAt(new Date(System.currentTimeMillis() + EXPIRATION_TIME))
+        .withSubject(username)
+        .withExpiresAt(expiresAt)
         .sign(HMAC512(SECRET.getBytes()));
-    response.addHeader(HEADER_STRING, TOKEN_PREFIX + token);
+    var bearerResponse = BearerTokenResponse.builder().bearerToken(token).expiration(expiresAt.getTime()).build();
+    response.getWriter().write(new ObjectMapper().writeValueAsString(bearerResponse));
+    response.addHeader("Content-Type", MediaType.APPLICATION_JSON_VALUE);
+    response.getWriter().flush();
   }
 }
