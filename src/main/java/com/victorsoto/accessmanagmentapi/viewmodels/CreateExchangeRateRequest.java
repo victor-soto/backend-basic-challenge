@@ -5,7 +5,7 @@ import lombok.Data;
 import java.math.BigDecimal;
 
 @Data
-public class UpdateExchangeRateRequest {
+public class CreateExchangeRateRequest {
 
   private String sourceCurrency;
   private String targetCurrency;

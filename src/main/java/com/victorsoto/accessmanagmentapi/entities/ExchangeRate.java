@@ -1,6 +1,5 @@
 package com.victorsoto.accessmanagmentapi.entities;
 
-import com.victorsoto.accessmanagmentapi.config.enums.CurrencyEnum;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -23,12 +22,10 @@ public class ExchangeRate {
   @Column(precision = 12, scale = 4)
   private BigDecimal rate;
 
-  @Enumerated(EnumType.STRING)
   @Column(name = "source_currency")
-  private CurrencyEnum sourceCurrency;
+  private String sourceCurrency;
 
-  @Enumerated(EnumType.STRING)
   @Column(name = "target_currency")
-  private CurrencyEnum targetCurrency;
+  private String targetCurrency;
 
 }

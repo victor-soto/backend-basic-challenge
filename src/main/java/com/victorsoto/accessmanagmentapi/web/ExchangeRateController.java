@@ -5,10 +5,9 @@ import com.victorsoto.accessmanagmentapi.viewmodels.*;
 import io.reactivex.Single;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/exchange-rate")
@@ -27,6 +26,18 @@ public class ExchangeRateController {
   public Single<UpdateExchangeRateResponse> update(@RequestBody UpdateExchangeRateRequest request) {
 
     return service.update(request);
+  }
+
+  @PostMapping(value = "/create", produces = MediaType.APPLICATION_JSON_VALUE)
+  public Single<List<CreateExchangeRateResponse>> create(@RequestBody List<CreateExchangeRateRequest> requestList) {
+
+    return service.create(requestList);
+  }
+
+  @GetMapping(value = "/all", produces = MediaType.APPLICATION_JSON_VALUE)
+  public Single<List<CreateExchangeRateResponse>> all() {
+
+    return service.all();
   }
 
 

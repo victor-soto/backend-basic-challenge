@@ -1,6 +1,5 @@
 package com.victorsoto.accessmanagmentapi.viewmodels;
 
-import com.victorsoto.accessmanagmentapi.config.enums.CurrencyEnum;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -16,8 +15,8 @@ public class ExchangeRateResponse {
 
   private BigDecimal amount;
   private BigDecimal convertedAmount;
-  private CurrencyEnum sourceCurrency;
-  private CurrencyEnum targetCurrency;
+  private String sourceCurrency;
+  private String targetCurrency;
   private BigDecimal rate;
 
 }
