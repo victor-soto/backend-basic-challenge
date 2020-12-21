@@ -10,10 +10,10 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.victorsoto</groupId>
-	<artifactId>backend-basic-challenge</artifactId>
+	<artifactId>athena</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>backend-basic-challenge-api</name>
-	<description>Api de control de accesos</description>
+	<name>athena-api</name>
+	<description>Athena Framework</description>
 
 	<properties>
 		<java.version>11</java.version>
